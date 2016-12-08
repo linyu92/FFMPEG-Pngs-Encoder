@@ -25,15 +25,14 @@
 #define kBitmap_SizeWith 512
 #define kBitmap_SizeHeight 512
 
-#define kCodecCtx_qmin 5
-#define kCodecCtx_qmax 25
+#define kCodecCtx_qmin 10
+#define kCodecCtx_qmax 30
 #define kCodecCtx_gop 12
 
 #define kFramesPerSecond 15
 
-#define kFrame_Count 80
-
 static void Help(void) {
+    printf("#############################\n");
     printf("用于将PNG序列转为H264视频 Usage:\n");
     printf(" PNG-Encoder [Options] [dir]\n");
     printf(" dir  ............ png文件夹，只有后缀为.png的文件参与编码\n");
@@ -109,6 +108,7 @@ int main(int argc, char* argv[])
         
         if (parse_error) {
             printf("Options参数解析失败\n");
+            Help();
             return -1;
         }
     }
@@ -161,6 +161,7 @@ int main(int argc, char* argv[])
     fp_out = fopen(filename_out, "wb");
     if (!fp_out) {
         printf("Could not open %s\n", filename_out);
+        Help();
         return -1;
     }
     
